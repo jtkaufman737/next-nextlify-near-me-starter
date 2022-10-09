@@ -1,6 +1,10 @@
 # next-nextlify-near-me-starter
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## About 
+
+This project is **not accepting PRs other than the maintainer**, it is part of a specific project to showcase NextJS geolocation middleware.
+
 ## Getting Started
 
 First, run the development server:
