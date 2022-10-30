@@ -11,18 +11,33 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 
 export async function getServerSideProps({ query }) {
-  const locations = [] //await axios.get(`${process.env.BASE_URL}/api/locations`).then(res => res.data)
-
+  console.log("QUERY IN SERVER SIDE PROPS", query)
   return {
     props: {
       query: query,
-      // locationList: locations || null,
-      // url: `${process.env.BASE_URL}/api/locations`
     }
   }
 }
 
-export default function Home(props) {
+export default function Home({ query }) {
+  // we will use NY, NY in lieu of location data from middleware
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/locations`
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    (async() => {
+      const response = await axios.get(
+        url,
+        { 
+          params: { 
+            latitude: query.latitude, 
+            longitude: query.longitude  
+          }
+        }
+      ).then(res => setLocations(res.data));
+    })()
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -34,14 +49,14 @@ export default function Home(props) {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Brewery finder 
-        </h1><pre>{JSON.stringify(props).toString()}</pre>
+        </h1>
         <div className="imageWrapper">
           <Image id="headerImage" width="60px" height="60px" alt="beer" src="/beer.png"/>
         </div>
         <div className="resultList">
           <ul>
              { 
-                Array.isArray(props.locationList) && props.locationList.map((location, index) => {
+                locations.map((location, index) => {
                   return <li key={index}>{location.name}</li>
                 })
               }
