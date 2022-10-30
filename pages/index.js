@@ -11,13 +11,13 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 
 export async function getServerSideProps({ query }) {
-  const locations = await axios.get(`${process.env.BASE_URL}/api/locations`).then(res => res.data)
+  const locations = [] //await axios.get(`${process.env.BASE_URL}/api/locations`).then(res => res.data)
 
   return {
     props: {
       query: query,
-      locationList: locations || null,
-      url: `${process.env.BASE_URL}/api/locations`
+      // locationList: locations || null,
+      // url: `${process.env.BASE_URL}/api/locations`
     }
   }
 }
