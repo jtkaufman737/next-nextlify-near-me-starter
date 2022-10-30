@@ -28,3 +28,16 @@ a {
 div.imageWrapper {
   padding:20px;
 }
+
+th, td {
+  padding:15px;
+}
+
+tr {
+  margin:2px;
+  border-bottom: 1px lightgray solid;
+}
+
+th {
+  text-align:left;
+}
