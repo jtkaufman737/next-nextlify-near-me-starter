@@ -1,3 +1,4 @@
+import 'axios';
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -9,37 +10,19 @@ const axios = require('axios');
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 
-export const getServerSideProps = ({ query }) => ({
-  props: query,
-})
+export async function getServerSideProps() {
+  // console.log(`${process.env.BASE_URL}/api/locations`)
+  const locations = await axios.get(`${process.env.BASE_URL}/api/locations`).then(res => res.data)
 
-export default function Home(props) {
-  console.log("PROPS", props)
-  const [locationList, setLocationList] = useState([]);
-
-  const getLocationList = async() => {
-    /* ok here I need to plug into the geolocation data */ 
-    const zip = 10001
-    const url = `${process.env.NEXT_PUBLIC_API_TARGET}${zip}&per_page=100`
-    console.log(url)
-    const locations = await axios.get(
-      url
-    ).then(res => {
-      return res.data
-    }).catch(err => console.error(err));
-    return locations;
+  return {
+    props: {
+      locationList: locations || null,
+      url: `${process.env.BASE_URL}/api/locations`
+    }
   }
+}
 
-  useEffect(() => {
-    (async() => {
-      const locations = await getLocationList();
-      console.log("Setting locations!", locations)
-      setLocationList(locations);
-      console.log(locationList)
-    })()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+export default function Home({locationList}) {
   return (
     <div className={styles.container}>
       <Head>
