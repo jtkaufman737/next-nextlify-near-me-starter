@@ -2,6 +2,7 @@ const axios = require('axios');
 
 export default async function handler(req, res) {
   try {
+    const { longitude, latitude } = req.query 
     console.error("iN LOCATIONS ENDPOINT", req)
     const baseUrl = process.env.NEXT_PUBLIC_API_TARGET
     const url = `${baseUrl}${latitude},${longitude}&per_page=10`
