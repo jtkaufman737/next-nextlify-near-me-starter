@@ -6,7 +6,19 @@ import { useState, useEffect } from 'react';
 
 const axios = require('axios');
 
-const Home = () => {
+export async function getStaticProps() {
+  // This links certain middleware properties we need for geolocation
+  // console.log("Get static props running with vals: ", longitude, latitude)
+  return {
+    props: {
+      longitude,
+      latitude
+    }
+  }
+}
+
+const Home = ({ query }) => {
+  console.log("PROPS IN HOME PAGE ARE", longitude, latitude)
   // we will use NY, NY in lieu of location data from middleware
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}api/locations`
   /* 
