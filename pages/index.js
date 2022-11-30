@@ -6,13 +6,15 @@ import { useState, useEffect } from 'react';
 
 const axios = require('axios');
 
-export async function getStaticProps() {
+export async function getServerSideProps({ query }) {
   // This links certain middleware properties we need for geolocation
   // console.log("Get static props running with vals: ", longitude, latitude)
+  console.log("QUERY IN SERVER SIDE PROPS")
+  console.log(query)
   return {
     props: {
-      longitude: null,
-      latitude: null
+      longitude: query.longitude,
+      latitude: query.latitude
     }
   }
 }
