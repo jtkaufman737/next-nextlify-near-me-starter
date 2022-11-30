@@ -38,15 +38,17 @@ const Home = ({ longitude, latitude }) => {
   */
   useEffect(() => {
     (async() => {
-      await axios.get(
-        url,
-        { 
-          params: { 
-            latitude: latitude, 
-            longitude: longitude  
+      if(!locations.length) {
+        await axios.get(
+          url,
+          { 
+            params: { 
+              latitude: latitude, 
+              longitude: longitude  
+            }
           }
-        }
-      ).then(res => setLocations(res.data));
+        ).then(res => setLocations(res.data));
+      }
     })()
   }, [])
 
