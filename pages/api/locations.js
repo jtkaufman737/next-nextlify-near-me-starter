@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 export default async function handler(req, res) {
-  const { longitude, latitude } = req.query
+  const { longitude, latitude } = req
   const baseUrl = process.env.NEXT_PUBLIC_API_TARGET
   const url = `${baseUrl}${latitude},${longitude}&per_page=10`
   const locations = await axios.get(url).then(res => res.data)
