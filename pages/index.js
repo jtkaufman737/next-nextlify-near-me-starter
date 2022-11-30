@@ -43,8 +43,8 @@ const Home = ({ longitude, latitude }) => {
           url,
           { 
             params: { 
-              latitude: latitude, 
-              longitude: longitude  
+              latitude: "-74.0060", 
+              longitude: "40.7128"  
             }
           }
         ).then(res => setLocations(res.data));
