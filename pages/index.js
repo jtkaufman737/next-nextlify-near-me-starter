@@ -6,21 +6,7 @@ import { useState, useEffect } from 'react';
 
 const axios = require('axios');
 
-export async function getServerSideProps({ query }) {
-  // This links certain middleware properties we need for geolocation
-  // console.log("Get static props running with vals: ", longitude, latitude)
-  console.log("QUERY IN SERVER SIDE PROPS")
-  console.log(query)
-  return {
-    props: {
-      longitude: query.longitude,
-      latitude: query.latitude
-    }
-  }
-}
-
-const Home = ({ longitude, latitude }) => {
-  console.log("PROPS IN HOME PAGE ARE", longitude, latitude)
+const Home = () => {
   // we will use NY, NY in lieu of location data from middleware
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}api/locations`
   /* 
@@ -40,17 +26,9 @@ const Home = ({ longitude, latitude }) => {
   */
   useEffect(() => {
     (async() => {
-      if(!locations.length) {
-        await axios.get(
-          url,
-          { 
-            params: { 
-              latitude: "-74.0060", 
-              longitude: "40.7128"  
-            }
-          }
-        ).then(res => setLocations(res.data));
-      }
+      await axios.get(
+        url,
+      ).then(res => setLocations(res.data));
     })()
   }, [])
 
