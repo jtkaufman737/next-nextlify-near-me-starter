@@ -17,8 +17,8 @@ export async function getStaticProps() {
   }
 }
 
-const Home = ({ props }) => {
-  console.log("PROPS IN HOME PAGE ARE", props)
+const Home = ({ latitude, longitude }) => {
+  console.log("PROPS IN HOME PAGE ARE", latitude, longitude)
   // we will use NY, NY in lieu of location data from middleware
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}api/locations`
   /* 
@@ -42,11 +42,11 @@ const Home = ({ props }) => {
         url,
         {
           params: {
-            latitude: props.latitude, 
-            longitude: props.longitude 
+            latitude: latitude, 
+            longitude: longitude 
           }
         }  
-      ).then(res => setLocations(res.data));
+      ).then(res => setLocations(res.data)).catch(err => console.log(err));
     })()
   }, [])
 
