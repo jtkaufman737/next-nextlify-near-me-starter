@@ -2,7 +2,7 @@
 import { NextRequest } from "next/server"
 import { MiddlewareRequest } from '@netlify/next';
 
-export async function middleware(req) {
+export async function middleware(req = NextRequest) {
 
   // we'll use NY, NY as a default in lieu of good data 
   const middlewareRequest = new MiddlewareRequest(req)
