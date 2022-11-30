@@ -6,7 +6,7 @@ export async function middleware(req) {
   console.log("REQ", req)
   console.log(req.nextUrl)
   // we'll use NY, NY as a default in lieu of good data 
-  if(pathname == "/api/locations") {
+  if(req.nextUrl.pathname == "/api/locations") {
     const middlewareRequest = new MiddlewareRequest(req)
     console.log(middlewareRequest)
     const longitude = req.geo.longitude ? req.geo.longitude : "-74.0060" 
