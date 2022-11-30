@@ -11,14 +11,14 @@ export async function getStaticProps() {
   // console.log("Get static props running with vals: ", longitude, latitude)
   return {
     props: {
-      longitude,
-      latitude
+      longitude: null,
+      latitude: null
     }
   }
 }
 
-const Home = ({ query }) => {
-  console.log("PROPS IN HOME PAGE ARE", longitude, latitude)
+const Home = ({ props }) => {
+  console.log("PROPS IN HOME PAGE ARE", props)
   // we will use NY, NY in lieu of location data from middleware
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}api/locations`
   /* 
@@ -40,6 +40,12 @@ const Home = ({ query }) => {
     (async() => {
       await axios.get(
         url,
+        {
+          params: {
+            latitude: props.latitude, 
+            longitude: props.longitude 
+          }
+        }  
       ).then(res => setLocations(res.data));
     })()
   }, [])
