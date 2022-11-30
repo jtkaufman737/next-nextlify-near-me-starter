@@ -47,7 +47,10 @@ const Home = ({ latitude, longitude }) => {
               longitude: longitude 
             }
           }  
-        ).then(res => setLocations(res.data)).catch(err => console.log(err));
+        ).then(res => {
+          console.log("RES DATA", res.data)
+          setLocations(res.data)
+        }).catch(err => console.log("ENDPOINT ERR FROM INDEX", err));
       }
     })()
   }, [])
