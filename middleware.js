@@ -10,5 +10,5 @@ export async function middleware(req) {
   const middlewareRequest = new MiddlewareRequest(req)
   const response = await middlewareRequest.next();
   console.log(response)
-  return response;
+  return { response, latitude, longitude };
 }

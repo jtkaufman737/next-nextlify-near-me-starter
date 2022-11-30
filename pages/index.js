@@ -8,6 +8,8 @@ const axios = require('axios');
 
 export async function getServerSideProps({ query }) {
   // This links certain middleware properties we need for geolocation
+  console.log("QUERY")
+  console.log(query)
   return {
     props: {
       query: query,
