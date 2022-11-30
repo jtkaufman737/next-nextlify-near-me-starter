@@ -11,7 +11,7 @@ export async function middleware(req) {
   const { latitude, longitude } = req.geo
   console.log("LONGITUDE, LATITUDE: ", longitude, latitude)
   const response = await middlewareRequest.next();
-  response.setPageProps("latitude", latitude)
-  response.setPageProps("longitude", longitude)
+  response.setPageProp("latitude", latitude)
+  response.setPageProp("longitude", longitude)
   return response;
 }
