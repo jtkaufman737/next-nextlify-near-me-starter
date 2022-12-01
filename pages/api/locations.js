@@ -6,7 +6,14 @@ export default async function handler(req, res) {
     console.log("iN LOCATIONS ENDPOINT", req, req.query, latitude, longitude)
     const baseUrl = process.env.NEXT_PUBLIC_API_TARGET
     const url = `${baseUrl}/?${latitude},${longitude}&per_page=10`
-    const locations = await axios.get(url).then(res => {
+    const locations = await axios.get(url, 
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept-Encoding': 'application/json',
+        }
+      }
+    ).then(res => {
       console.log("URL, RES, RES DATA", url, res, res.data)
       return res.data
     }).catch(err => console.log("GET BREWERY ERROR", err))
