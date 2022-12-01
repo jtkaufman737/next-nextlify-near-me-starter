@@ -20,7 +20,7 @@ export async function getStaticProps() {
 const Home = ({ latitude, longitude }) => {
   console.log("PROPS IN HOME PAGE ARE", latitude, longitude)
   // we will use NY, NY in lieu of location data from middleware
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}api/locations`
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/locations`
   /* 
   Named fields are the JSON properties to build out as columns in our table of results
   Place type is the label throughout the app, for me "Brewery"
@@ -39,6 +39,7 @@ const Home = ({ latitude, longitude }) => {
   useEffect(() => {
     (async() => {
       if(!locations.length) {
+        console.log("URL IS", url)
         await axios.get(
           url,
           {
